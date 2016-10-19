@@ -1,7 +1,6 @@
 package Task2_Bank;
 
 import java.math.BigDecimal;
-
 import Task1_Credentials.Credentials;
 
 public class Account {

@@ -41,12 +41,12 @@ public class Bank  {
 	}
 	
 	public void openAccount(String clientName, long governmentId, String username, String password) {
-		clientName = account.getClientName();
-		governmentId = account.getGovernmentId();
-		username = credetials.getUserName(); 
-		password = credetials.getPassword();
+		account.setClientName(clientName);
+		account.setGovId(governmentId);
+		account.getCredetials().setUserName(username);
+		account.getCredetials().setPassword(password);
 		double accountBalance = account.getAccountBalance();
-		System.out.printf("Openning new account for %s %d", clientName, governmentId);
+		System.out.printf("Opening new account for %s %d", clientName, governmentId);
 		System.out.println();
 		accounts.add(new Account(clientName, governmentId, accountBalance, username, password, credetials));
 		for(Account acc : accounts) {
@@ -89,7 +89,7 @@ public class Bank  {
 			if (accounts.get(index).getCredetials().getUserName().equalsIgnoreCase(username)
 					&& accounts.get(index).getCredetials().getPassword().equalsIgnoreCase(password)
 					&& accounts.get(index).hasAccess(password)) {
-				if (amount >= 0 && accounts.get(index).getAccountBalance() > 0) {
+				if (amount >= 0 && accounts.get(index).getAccountBalance() > amount) {
 					accounts.get(index).withdraw(amount);
 					System.out.println("The new balance is now " + accounts.get(index).getAccountBalance());
 				} else {

@@ -1,4 +1,4 @@
-package Task1_Credentials;
+package Task3_CredentialsManager;
 
 import java.util.List;
 import java.util.Scanner;

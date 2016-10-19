@@ -16,15 +16,15 @@ public class BankManagementMain {
 
 	public static void main(String[] args) {
 		List<Account> bankAccounts = new ArrayList<>();
-			
+		
 		while(true) {
-			Account account = new Account();
+			Account account = new Account();	
 			Bank bank = new Bank();
 			Credetials credetials = new Credetials();
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("OPEN, CLOSE, DEPOSIT, WITHDRAW, TRANSFER, CheckAssets, END");
-			String inpuUserCommand = scanner.next();
-			if(inpuUserCommand.equalsIgnoreCase("END")) {
+			System.out.println("OPEN, CLOSE, DEPOSIT, WITHDRAW, TRANSFER, CHECKASSETS, END");
+			String inputUserCommand = scanner.next();
+			if(inputUserCommand.equalsIgnoreCase("END")) {
 				break;
 			}
 			System.out.println("Name, id, username, password ");
@@ -36,42 +36,43 @@ public class BankManagementMain {
 			credetials.setUserName(scanner.next());
 			
 			credetials.setPassword(scanner.next());
+			
 			account.setCredetials(credetials);
 			bank.setAccounts(bankAccounts);
 			bank.setAccount(account);
 			bank.setCredetials(credetials);
-			if(inpuUserCommand.equalsIgnoreCase("OPEN")) {
+			if(inputUserCommand.equalsIgnoreCase("OPEN")) {
 				bank.openAccount(account.getClientName(), 
 								 account.getGovernmentId(), 
 								 account.getCredetials().getUserName(),
 								 account.getCredetials().getPassword());
-			}else if(inpuUserCommand.equalsIgnoreCase("CLOSE")) {
+			}else if(inputUserCommand.equalsIgnoreCase("CLOSE")) {
 				bank.closeAccount(account.getCredetials().getUserName(), 
 								  account.getCredetials().getPassword());
-			}else if(inpuUserCommand.equalsIgnoreCase("DEPOSIT")) {
-				System.out.println("Please enter an an amount to deposit");
+			}else if(inputUserCommand.equalsIgnoreCase("DEPOSIT")) {
+				System.out.println("Please enter an amount to deposit");
 				int amount = scanner.nextInt();
 				bank.deposit(account.getCredetials().getUserName(), amount);
-			}else if(inpuUserCommand.equalsIgnoreCase("WITHDRAW")) {
-				System.out.println("Please enter an an amount to withdraw");
+			}else if(inputUserCommand.equalsIgnoreCase("WITHDRAW")) {
+				System.out.println("Please enter an amount to withdraw");
 				int amount = scanner.nextInt();
 				bank.withdraw(account.getCredetials().getUserName(), 
 							  account.getCredetials().getPassword(), 
 							  amount);
-			}else if(inpuUserCommand.equalsIgnoreCase("TRANSFER")) {
+			}else if(inputUserCommand.equalsIgnoreCase("TRANSFER")) {
 				System.out.println("Enter amount to transfer");
 				int amount = scanner.nextInt();
 				System.out.println("Name of recipient");
-				String receipent = scanner.next();
+				String recipient = scanner.next();
 				String acc = null;
 				for (int index = 0; index < bankAccounts.size(); index++) {
-				if(bankAccounts.get(index).getCredetials().getUserName().equalsIgnoreCase(receipent)) {
+					if(bankAccounts.get(index).getCredetials().getUserName().equalsIgnoreCase(recipient)) {
 						acc = bankAccounts.get(index).getCredetials().getUserName();
 					}
 				}
 				bank.transfer(account.getCredetials().getUserName(), account.getCredetials().getPassword(), amount, acc);
 
-			}else if(inpuUserCommand.equalsIgnoreCase("CheckAssets")){
+			}else if(inputUserCommand.equalsIgnoreCase("CheckAssets")){
 				bank.calculateAccountAssets();
 			}else {
 				System.out.println("Unknown command");
